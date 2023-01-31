@@ -2,7 +2,7 @@ import { useAuth } from '../contexts/AuthContext'
 import NewQuoteForm from './new-quote-form'
 import { useLocation } from 'react-router-dom'
 
-export default function Header() {
+const Header = () => {
   const { logout, user } = useAuth()
   const location = useLocation()
 
@@ -24,3 +24,5 @@ export default function Header() {
     </header>
   )
 }
+
+export default Header

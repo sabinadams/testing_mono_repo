@@ -9,7 +9,7 @@ interface Props {
 
 let QuotesContext: React.Context<QuotesContextType>
 
-export function useQuotes() {
+export const useQuotes = () => {
   return useContext(QuotesContext)
 }
 

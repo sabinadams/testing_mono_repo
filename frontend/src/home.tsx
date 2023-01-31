@@ -2,7 +2,7 @@ import Layout from './components/layout'
 import Quote from './components/quote'
 import { useQuotes } from './contexts/QuotesContext'
 
-export default function Home() {
+const Home = () => {
   const { quotes } = useQuotes()
   return (
     <Layout>
@@ -14,3 +14,5 @@ export default function Home() {
     </Layout>
   )
 }
+
+export default Home

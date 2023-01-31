@@ -3,7 +3,8 @@ import Layout from './components/layout'
 import { useAuth } from './contexts/AuthContext'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-export default function Login() {
+
+const Login = () => {
   const { login, signup, user } = useAuth()
   const { state } = useLocation()
   const navigate = useNavigate()
@@ -104,3 +105,5 @@ export default function Login() {
     </Layout>
   )
 }
+
+export default Login

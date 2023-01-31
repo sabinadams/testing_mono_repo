@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 
 let AuthContext: React.Context<AuthContextType>
 
-export function useAuth() {
+export const useAuth = () => {
   return useContext(AuthContext)
 }
 
@@ -14,7 +14,7 @@ export const AuthProvider = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
-  async function login(username: string, password: string) {
+  const login = async (username: string, password: string) => {
     setLoading(true)
     await _auth.login(username, password)
     const user = _auth.loadUser()
@@ -22,12 +22,12 @@ export const AuthProvider = () => {
     setLoading(false)
   }
 
-  function logout() {
+  const logout = () => {
     setCurrentUser(null)
     _auth.logout()
   }
 
-  async function signup(username: string, password: string) {
+  const signup = async (username: string, password: string) => {
     setLoading(true)
     await _auth.signup(username, password)
     const user = _auth.loadUser()

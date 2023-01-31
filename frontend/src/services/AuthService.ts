@@ -2,7 +2,7 @@ import { toast } from 'react-toastify'
 import type { AuthResponse } from '../types'
 import axios from './HttpService'
 
-export async function login(username: string, password: string) {
+export const login = async (username: string, password: string) => {
   const { data, status } = await axios.post<AuthResponse>(`/auth/signin`, {
     username,
     password
@@ -21,11 +21,11 @@ export async function login(username: string, password: string) {
   }
 }
 
-export function logout() {
+export const logout = () => {
   localStorage.removeItem('quoots-user')
 }
 
-export async function signup(username: string, password: string) {
+export const signup = async (username: string, password: string) => {
   const { data, status } = await axios.post<AuthResponse>(`/auth/signup`, {
     username,
     password
@@ -44,7 +44,7 @@ export async function signup(username: string, password: string) {
   }
 }
 
-export function loadUser() {
+export const loadUser = () => {
   const user = localStorage.getItem('quoots-user')
   if (user) {
     return JSON.parse(user)
