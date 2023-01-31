@@ -1,0 +1,20 @@
+{
+  "name": "testing_mono_repo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^4.9.0",
+    "husky": "^8.0.2"
+  },
+  "devDependencies": {
+    "prisma": "4.7.1"
+  }
+}

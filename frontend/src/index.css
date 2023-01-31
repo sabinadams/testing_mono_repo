@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html,
+#root {
+  @apply bg-gray-200;
+  height: 100%;
+  width: 100%;
+}
+
+.text-contrast {
+  mix-blend-mode: difference;
+}
