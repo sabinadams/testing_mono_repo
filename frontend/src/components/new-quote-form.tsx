@@ -1,34 +1,34 @@
-import { useState } from "react";
-import { useQuotes } from "../contexts/QuotesContext";
+import { useState } from 'react'
+import { useQuotes } from '../contexts/QuotesContext'
 
 const NewQuoteForm = () => {
-  const { saveQuote, refetchQuotes } = useQuotes();
+  const { saveQuote, refetchQuotes } = useQuotes()
 
   const [quote, setQuote] = useState<{
-    text: string;
-    tags: string[];
+    text: string
+    tags: string[]
   }>({
-    text: "",
-    tags: [],
-  });
+    text: '',
+    tags: []
+  })
   const handleTags = (e: React.FormEvent<HTMLInputElement>): void => {
-    const string = e.currentTarget.value || "";
+    const string = e.currentTarget.value || ''
 
     setQuote({
       ...quote,
-      tags: [...new Set(string.split(",").map((tag) => tag.trim()))],
-    });
-  };
+      tags: [...new Set(string.split(',').map(tag => tag.trim()))]
+    })
+  }
   const handleText = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setQuote({ ...quote, text: e.currentTarget.value });
-  };
+    setQuote({ ...quote, text: e.currentTarget.value })
+  }
 
   const submit = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    await saveQuote(quote.text, quote.tags);
-    setQuote({ text: "", tags: [] });
-    refetchQuotes();
-  };
+    e.preventDefault()
+    await saveQuote(quote.text, quote.tags)
+    setQuote({ text: '', tags: [] })
+    refetchQuotes()
+  }
   return (
     <div className="w-1/3 flex flex-col space-y-2 p-4 m-2 mt-0 items-start rounded-xl bg-white border-2 border-gray-700">
       <label className="flex space-x-2 w-full">
@@ -61,7 +61,7 @@ const NewQuoteForm = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NewQuoteForm;
+export default NewQuoteForm

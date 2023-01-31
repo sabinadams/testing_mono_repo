@@ -1,7 +1,7 @@
-import Header from "./header";
+import Header from './header'
 
 interface Props {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const Layout: React.FC<Props> = ({ children }) => {
@@ -10,7 +10,7 @@ const Layout: React.FC<Props> = ({ children }) => {
       <Header />
       <main className="px-6 py-6 w-full h-full flex-1">{children}</main>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

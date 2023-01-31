@@ -1,41 +1,41 @@
-import { useEffect, useState } from "react";
-import Layout from "./components/layout";
-import { useAuth } from "./contexts/AuthContext";
-import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useEffect, useState } from 'react'
+import Layout from './components/layout'
+import { useAuth } from './contexts/AuthContext'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 export default function Login() {
-  const { login, signup, user } = useAuth();
-  const { state } = useLocation();
-  const navigate = useNavigate();
+  const { login, signup, user } = useAuth()
+  const { state } = useLocation()
+  const navigate = useNavigate()
   const [form, setForm] = useState({
-    username: "",
-    password: "",
-  });
+    username: '',
+    password: ''
+  })
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    setForm({ ...form, [e.currentTarget.name]: e.currentTarget.value });
-  };
+    setForm({ ...form, [e.currentTarget.name]: e.currentTarget.value })
+  }
 
   const submit = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    const { name } = e.currentTarget as HTMLButtonElement;
+    e.preventDefault()
+    const { name } = e.currentTarget as HTMLButtonElement
     if (!form.username.length || !form.password.length) {
-      toast.warn("Please enter a username and password");
-      return;
+      toast.warn('Please enter a username and password')
+      return
     }
-    if (name === "login") {
-      return await login(form.username, form.password);
+    if (name === 'login') {
+      return await login(form.username, form.password)
     }
-    if (name === "signup") {
-      return await signup(form.username, form.password);
+    if (name === 'signup') {
+      return await signup(form.username, form.password)
     }
-  };
+  }
 
   useEffect(() => {
     if (user) {
-      navigate(state?.path || "/");
+      navigate(state?.path || '/')
     }
-  }, [user]);
+  }, [user])
 
   return (
     <Layout>
@@ -50,7 +50,7 @@ export default function Login() {
               <input
                 className={`w-full rounded-xl p-2 shadow-solid border-2 border-gray-700 focus:outline-none mb-4 transition duration-300 ease-in-out ${
                   form.username.length
-                    ? "border-gray-700"
+                    ? 'border-gray-700'
                     : `shadow-none translate-x-2 translate-y-2 border-gray-400`
                 }`}
                 id="username"
@@ -69,7 +69,7 @@ export default function Login() {
                 id="password"
                 className={`w-full rounded-xl p-2 shadow-solid border-2 border-gray-700 focus:outline-none mb-4 transition duration-300 ease-in-out ${
                   form.password.length
-                    ? "border-gray-700"
+                    ? 'border-gray-700'
                     : `shadow-none translate-x-2 translate-y-2 border-gray-400`
                 }`}
                 name="password"
@@ -102,5 +102,5 @@ export default function Login() {
         </div>
       </div>
     </Layout>
-  );
+  )
 }
