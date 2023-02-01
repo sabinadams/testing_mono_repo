@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "pnpm run -r dev",
+    "checks": "pnpm run -r checks",
+    "startup": "docker-compose up -d && pnpm run -r dev"
   },
   "keywords": [],
   "author": "",
