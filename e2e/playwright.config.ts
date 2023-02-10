@@ -1,5 +1,4 @@
-import type { PlaywrightTestConfig } from '@playwright/test'
-import { devices } from '@playwright/test'
+import { defineConfig, devices } from '@playwright/test'
 
 /**
  * Read environment variables from file.
@@ -10,8 +9,8 @@ import { devices } from '@playwright/test'
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
-  testDir: './tests',
+export default defineConfig({
+  testDir: './.',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   expect: {
@@ -46,62 +45,52 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome']
-      }
+      use: { ...devices['Desktop Chrome'] }
     },
 
     {
       name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox']
-      }
+      use: { ...devices['Desktop Firefox'] }
     },
 
     {
       name: 'webkit',
-      use: {
-        ...devices['Desktop Safari']
-      }
+      use: { ...devices['Desktop Safari'] }
     }
 
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
+    //   use: { ...devices['Pixel 5'] },
     // },
     // {
     //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12'],
-    //   },
+    //   use: { ...devices['iPhone 12'] },
     // },
 
     /* Test against branded browsers. */
     // {
     //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
+    //   use: { channel: 'msedge' },
     // },
     // {
     //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
+    //   use: { channel: 'chrome' },
     // },
-  ]
+  ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   // outputDir: 'test-results/',
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   port: 3000,
-  // },
-}
-
-export default config
+  webServer: [
+    {
+      command: 'pnpm run --filter=backend dev',
+      port: 3000
+    },
+    {
+      command: 'pnpm run --filter=frontend dev',
+      port: 5173
+    }
+  ]
+})

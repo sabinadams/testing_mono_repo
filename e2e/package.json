@@ -1,0 +1,20 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "../scripts/run-e2e.sh"
+  },
+  "prisma": {
+    "schema": "../prisma/schema.prisma"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.30.0",
+    "@types/node": "^18.13.0",
+    "cypress": "^12.5.0"
+  }
+}
