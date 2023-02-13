@@ -15,8 +15,8 @@
     "checks:fix": "npm run format && npm run lint",
     "test:unit": "vitest -c ./vitest.config.unit.ts",
     "test:unit:ui": "vitest -c ./vitest.config.unit.ts --ui",
-    "test:int": "../scripts/run-integration.sh",
-    "test:int:ui": "../scripts/run-integration.sh --ui"
+    "test:int": "sh ../scripts/run-integration.sh",
+    "test:int:ui": "sh ../scripts/run-integration.sh --ui"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
