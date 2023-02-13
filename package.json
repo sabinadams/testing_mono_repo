@@ -10,7 +10,8 @@
     "startup": "./scripts/db-startup.sh && pnpm run -r dev",
     "test:backend:int": "pnpm run --filter=backend test:int",
     "test:backend:unit": "pnpm run --filter=backend test:unit",
-    "test:e2e": "pnpm run --filter=e2e test"
+    "test:e2e": "pnpm run --filter=e2e test",
+    "test:e2e:headed": "pnpm run --filter=e2e test:headed"
   },
   "keywords": [],
   "author": "",
