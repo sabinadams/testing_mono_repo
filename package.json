@@ -9,7 +9,8 @@
     "checks": "pnpm run -r checks",
     "startup": "docker-compose up -d && pnpm run -r dev",
     "test:backend:int": "pnpm run --filter=backend test:int",
-    "test:backend:unit": "pnpm run --filter=backend test:unit"
+    "test:backend:unit": "pnpm run --filter=backend test:unit",
+    "test:e2e": "pnpm run --filter=e2e test"
   },
   "keywords": [],
   "author": "",
