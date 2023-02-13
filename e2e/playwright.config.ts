@@ -86,11 +86,13 @@ export default defineConfig({
   webServer: [
     {
       command: 'pnpm run --filter=backend dev',
-      port: 3000
+      port: 3000,
+      reuseExistingServer: true
     },
     {
       command: 'pnpm run --filter=frontend dev',
-      port: 5173
+      port: 5173,
+      reuseExistingServer: true
     }
   ]
 })
