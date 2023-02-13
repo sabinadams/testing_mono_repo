@@ -121,7 +121,8 @@ describe('quotes.controller', () => {
         quote: {
           id: 1,
           text: 'Hello world',
-          userId: 1
+          userId: 1,
+          tags: []
         }
       })
     })
