@@ -14,13 +14,12 @@ test.describe('auth', () => {
     page,
     storage
   }) => {
-    const navigation = page.waitForURL('http://localhost:5173')
     await loginPage.populateForm(
       user_credentials.username,
       user_credentials.password
     )
     await page.click('#signup')
-    await navigation
+    await page.waitForURL('http://localhost:5173')
 
     const localStorage = await storage.localStorage
 
@@ -30,16 +29,13 @@ test.describe('auth', () => {
 
   test('should redirect to the home page when a user logs in', async ({
     loginPage,
-    validUser,
-    user_credentials,
     page,
-    storage
+    storage,
+    account
   }) => {
-    const navigation = page.waitForURL('http://localhost:5173')
-
-    await loginPage.populateForm(validUser.username, user_credentials.password)
+    await loginPage.populateForm(account.username, account.password)
     await page.click('#login')
-    await navigation
+    await page.waitForURL('http://localhost:5173')
 
     const localStorage = await storage.localStorage
 
@@ -51,11 +47,9 @@ test.describe('auth', () => {
     loginPage,
     page
   }) => {
-    const navigation = page.waitForURL('http://localhost:5173/login')
-
     await loginPage.populateForm('incorrect', 'password')
     await page.click('#login')
-    await navigation
+    await page.waitForURL('http://localhost:5173/login')
 
     await expect(page).toHaveURL('http://localhost:5173/login')
     await expect(page.getByText('Account not found.')).toBeVisible()
@@ -63,15 +57,11 @@ test.describe('auth', () => {
 
   test('should warn you if an you try to sign up with an existing username', async ({
     loginPage,
-    validUser,
-    page
+    page,
+    account
   }) => {
-    const navigation = page.waitForURL('http://localhost:5173/login')
-
-    await loginPage.populateForm(validUser.username, 'password')
+    await loginPage.populateForm(account.username, account.password)
     await page.click('#signup')
-    await navigation
-
     await expect(page).toHaveURL('http://localhost:5173/login')
     await expect(
       page.getByText('A user already exists with that username')
@@ -90,18 +80,14 @@ test.describe('auth', () => {
   test('should return you to the home page when you log out', async ({
     page,
     loginPage,
-    validUser,
-    user_credentials,
-    storage
+    storage,
+    account
   }) => {
-    const navigationToHome = page.waitForURL('http://localhost:5173')
-    const navigationToLogin = page.waitForURL('http://localhost:5173/login')
-
-    await loginPage.populateForm(validUser.username, user_credentials.password)
+    await loginPage.populateForm(account.username, account.password)
     await page.click('#login')
-    await navigationToHome
+    await page.waitForURL('http://localhost:5173')
     await page.click('#logout')
-    await navigationToLogin
+    await page.waitForURL('http://localhost:5173/login')
 
     const localStorage = await storage.localStorage
 

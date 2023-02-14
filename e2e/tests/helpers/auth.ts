@@ -13,7 +13,7 @@ export const createUser = async (username = '', password = '') => {
       password
     })
   } catch (e) {
-    console.log(e.message)
+    console.log(e)
     throw e.message
   }
 

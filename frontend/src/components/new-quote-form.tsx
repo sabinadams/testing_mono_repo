@@ -35,6 +35,7 @@ const NewQuoteForm = () => {
         <span className="w-12 mt-2 text-sm font-bold">Quote</span>
         <textarea
           name="text"
+          id="body"
           value={quote.text}
           onChange={handleText}
           className="w-full rounded-xl focus:outline-none border-2 border-gray-700 shadow-solid p-4"
@@ -47,6 +48,7 @@ const NewQuoteForm = () => {
           <input
             type="text"
             name="tags"
+            id="tags"
             value={quote.tags}
             onChange={handleTags}
             className="h-12 w-full rounded-xl focus:outline-none border-2 border-gray-700 shadow-solid p-4"
@@ -54,6 +56,7 @@ const NewQuoteForm = () => {
           />
         </label>
         <button
+          id="save-quote"
           onClick={submit}
           className="h-12 text-sm font-bold rounded-xl bg-white px-4 py-1 shadow-solid transition duration-300 ease-in-out hover:shadow-none hover:translate-x-2 hover:translate-y-2 border-2 border-gray-700"
         >
