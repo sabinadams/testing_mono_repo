@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
 # Export env vars
-export $(grep -v '^#' ../.env | xargs)
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+export $(grep -v '^#' $DIR/../.env | xargs)
