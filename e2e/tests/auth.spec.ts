@@ -86,4 +86,26 @@ test.describe('auth', () => {
       page.getByText('Please enter a username and password')
     ).toBeVisible()
   })
+
+  test('should return you to the home page when you log out', async ({
+    page,
+    loginPage,
+    validUser,
+    user_credentials,
+    storage
+  }) => {
+    const navigationToHome = page.waitForURL('http://localhost:5173')
+    const navigationToLogin = page.waitForURL('http://localhost:5173/login')
+
+    await loginPage.populateForm(validUser.username, user_credentials.password)
+    await page.click('#login')
+    await navigationToHome
+    await page.click('#logout')
+    await navigationToLogin
+
+    const localStorage = await storage.localStorage
+
+    await expect(page).toHaveURL('http://localhost:5173/login')
+    await expect(localStorage).not.toHaveProperty('quoots-user')
+  })
 })
