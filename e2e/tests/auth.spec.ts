@@ -11,7 +11,8 @@ test.describe('auth', () => {
   test('Should redirect to the home page when a new account is created', async ({
     loginPage,
     user_credentials,
-    page
+    page,
+    storage
   }) => {
     const navigation = page.waitForURL('http://localhost:5173')
     await loginPage.populateForm(
@@ -21,6 +22,9 @@ test.describe('auth', () => {
     await page.click('#signup')
     await navigation
 
+    const localStorage = await storage.localStorage
+
+    await expect(localStorage).toHaveProperty('quoots-user')
     await expect(page).toHaveURL('http://localhost:5173')
   })
 
