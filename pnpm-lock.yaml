@@ -78,8 +78,10 @@ importers:
     specifiers:
       '@playwright/test': ^1.30.0
       '@types/node': 18.11.12
+      axios: ^1.3.0
     dependencies:
       '@types/node': 18.11.12
+      axios: 1.3.0
     devDependencies:
       '@playwright/test': 1.30.0
 

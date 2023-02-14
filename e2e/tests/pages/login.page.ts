@@ -11,15 +11,8 @@ export class LoginPage {
     await this.page.goto('http://localhost:5173/login')
   }
 
-  async login(username: string, password: string) {
+  async populateForm(username: string, password: string) {
     await this.page.fill('#username', username)
     await this.page.fill('#password', password)
-    await this.page.click('#login')
-  }
-
-  async signup(username: string, password: string) {
-    await this.page.fill('#username', username)
-    await this.page.fill('#password', password)
-    await this.page.click('#signup')
   }
 }

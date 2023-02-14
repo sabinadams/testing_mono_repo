@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@fixtures/*": ["fixtures/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@helpers/*": ["helpers/*"]
     }
   }
 }
