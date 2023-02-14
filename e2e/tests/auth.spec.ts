@@ -36,6 +36,7 @@ test.describe('auth', () => {
     storage
   }) => {
     const navigation = page.waitForURL('http://localhost:5173')
+
     await loginPage.populateForm(validUser.username, user_credentials.password)
     await page.click('#login')
     await navigation
@@ -51,10 +52,38 @@ test.describe('auth', () => {
     page
   }) => {
     const navigation = page.waitForURL('http://localhost:5173/login')
+
     await loginPage.populateForm('incorrect', 'password')
     await page.click('#login')
     await navigation
 
-    expect()
+    await expect(page).toHaveURL('http://localhost:5173/login')
+    await expect(page.getByText('Account not found.')).toBeVisible()
+  })
+
+  test('should warn you if an you try to sign up with an existing username', async ({
+    loginPage,
+    validUser,
+    page
+  }) => {
+    const navigation = page.waitForURL('http://localhost:5173/login')
+
+    await loginPage.populateForm(validUser.username, 'password')
+    await page.click('#signup')
+    await navigation
+
+    await expect(page).toHaveURL('http://localhost:5173/login')
+    await expect(
+      page.getByText('A user already exists with that username')
+    ).toBeVisible()
+  })
+
+  test('should warn you if your form is empty', async ({ page, loginPage }) => {
+    await loginPage.page.click('#login')
+
+    await expect(page).toHaveURL('http://localhost:5173/login')
+    await expect(
+      page.getByText('Please enter a username and password')
+    ).toBeVisible()
   })
 })

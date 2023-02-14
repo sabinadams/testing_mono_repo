@@ -1,14 +1,21 @@
 import axios from 'axios'
 
-export const createUser = async (username: string, password: string) => {
-  const response = await axios.post<{
-    user: {
-      username: string
-    }
-  }>('http://localhost:3000/auth/signup', {
-    username,
-    password
-  })
+export const createUser = async (username = '', password = '') => {
+  let response
+
+  try {
+    response = await axios.post<{
+      user: {
+        username: string
+      }
+    }>('http://localhost:3000/auth/signup', {
+      username,
+      password
+    })
+  } catch (e) {
+    console.log(e.message)
+    throw e.message
+  }
 
   return response.data.user
 }
