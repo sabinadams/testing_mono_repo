@@ -8,7 +8,7 @@ test.describe('auth', () => {
     await expect(page).toHaveURL('http://localhost:5173/login')
   })
 
-  test('Should redirect to the home page when a new account is created', async ({
+  test('should redirect to the home page when a new account is created', async ({
     loginPage,
     user_credentials,
     page,
@@ -28,7 +28,7 @@ test.describe('auth', () => {
     await expect(page).toHaveURL('http://localhost:5173')
   })
 
-  test('Should redirect to the home page when a user logs in', async ({
+  test('should redirect to the home page when a user logs in', async ({
     loginPage,
     validUser,
     user_credentials,
@@ -44,5 +44,17 @@ test.describe('auth', () => {
 
     await expect(localStorage).toHaveProperty('quoots-user')
     await expect(page).toHaveURL('http://localhost:5173')
+  })
+
+  test('should warn you if your login is incorrect', async ({
+    loginPage,
+    page
+  }) => {
+    const navigation = page.waitForURL('http://localhost:5173/login')
+    await loginPage.populateForm('incorrect', 'password')
+    await page.click('#login')
+    await navigation
+
+    expect()
   })
 })
