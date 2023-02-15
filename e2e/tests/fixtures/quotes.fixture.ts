@@ -71,11 +71,11 @@ export const test = base.extend<QuoteFixtures>({
       where: { name: testTag }
     })
   },
-  quote: async ({ homePage, getQuoteDetails }, use) => {
+  quote: async ({ homePage, page, getQuoteDetails }, use) => {
     const details = getQuoteDetails(true, true)
     await homePage.populateForm(details.body, details.tags)
-    await homePage.page.click('#save-quote')
-    await homePage.page.waitForLoadState('networkidle')
+    await page.click('#save-quote')
+    await page.waitForLoadState('networkidle')
 
     const quote = await prisma.quote.findFirst({
       include: { tags: true },
