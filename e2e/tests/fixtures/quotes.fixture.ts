@@ -2,6 +2,7 @@ import { test as base } from '@playwright/test'
 import { HomePage } from '@pages/home.page'
 import { LoginPage } from '@pages/login.page'
 import prisma from '@helpers/prisma'
+import { Prisma } from '@helpers/prisma'
 import { faker } from '@faker-js/faker'
 
 type UserDetails = {
@@ -14,8 +15,13 @@ type QuoteDetails = {
   tags: string
 }
 
+const quoteWithArgs = Prisma.validator<Prisma.QuoteArgs>()({
+  include: { tags: true }
+})
+
 type QuoteFixtures = {
-  getQuote: (includeQuote: boolean, includeTags: boolean) => QuoteDetails
+  getQuoteDetails: (includeQuote: boolean, includeTags: boolean) => QuoteDetails
+  quote: Prisma.QuoteGetPayload<typeof quoteWithArgs>
   user_credentials: UserDetails
   account: UserDetails
   homePage: HomePage
@@ -49,7 +55,7 @@ export const test = base.extend<QuoteFixtures>({
 
     await use(user_credentials)
   },
-  getQuote: async ({}, use) => {
+  getQuoteDetails: async ({}, use) => {
     const testBody = faker.lorem.sentence()
     const testTag = faker.word.adverb()
 
@@ -64,6 +70,19 @@ export const test = base.extend<QuoteFixtures>({
     await prisma.tag.deleteMany({
       where: { name: testTag }
     })
+  },
+  quote: async ({ homePage, getQuoteDetails }, use) => {
+    const details = getQuoteDetails(true, true)
+    await homePage.populateForm(details.body, details.tags)
+    await homePage.page.click('#save-quote')
+    await homePage.page.waitForLoadState('networkidle')
+
+    const quote = await prisma.quote.findFirst({
+      include: { tags: true },
+      where: { text: details.body }
+    })
+
+    await use(quote)
   },
   homePage: async ({ page, account }, use) => {
     const homePage = new HomePage(page)

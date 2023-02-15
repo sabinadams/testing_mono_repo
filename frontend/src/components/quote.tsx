@@ -26,7 +26,11 @@ const Quote = ({ quote }: Props) => {
       key={quote.id}
       className="relative bg-white rounded-md shadow-solid p-4 transition duration-300 ease-in-out hover:shadow-none hover:translate-x-2 hover:translate-y-2 border-2 border-gray-700"
     >
-      <button className="absolute top-2 right-4" onClick={handleDelete}>
+      <button
+        className="absolute top-2 right-4"
+        onClick={handleDelete}
+        id={`delete-${quote.id}`}
+      >
         🗑
       </button>
       <p className="text-gray-800">{quote.text}</p>

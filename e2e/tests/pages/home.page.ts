@@ -7,15 +7,6 @@ export class HomePage {
   constructor(page: Page) {
     this.page = page
     this.loginPage = new LoginPage(page)
-    this.page.on('request', async request => {
-      const response = await (
-        await (await request.response()).body()
-      ).toString()
-
-      if (request.method() === 'POST') {
-        console.log('>>', request.method(), request.url(), response)
-      }
-    })
   }
 
   async goto(user: { username: string; password: string }) {
