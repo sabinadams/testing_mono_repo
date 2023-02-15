@@ -1,14 +1,8 @@
-import { test as base } from '@playwright/test'
+import { testBase } from './base.fixture'
 import { HomePage } from '@pages/home.page'
-import { LoginPage } from '@pages/login.page'
 import prisma from '@helpers/prisma'
 import { Prisma } from '@helpers/prisma'
 import { faker } from '@faker-js/faker'
-
-type UserDetails = {
-  username: string
-  password: string
-}
 
 type QuoteDetails = {
   body: string
@@ -22,39 +16,10 @@ const quoteWithArgs = Prisma.validator<Prisma.QuoteArgs>()({
 type QuoteFixtures = {
   getQuoteDetails: (includeQuote: boolean, includeTags: boolean) => QuoteDetails
   quote: Prisma.QuoteGetPayload<typeof quoteWithArgs>
-  user_credentials: UserDetails
-  account: UserDetails
   homePage: HomePage
 }
 
-export const test = base.extend<QuoteFixtures>({
-  user_credentials: async ({}, use) => {
-    const username = faker.internet.userName()
-    const password = faker.internet.password()
-
-    await use({
-      username,
-      password
-    })
-
-    await prisma.user.deleteMany({ where: { username } })
-  },
-  account: async ({ browser, user_credentials }, use) => {
-    const page = await browser.newPage()
-    const loginPage = new LoginPage(page)
-
-    await loginPage.goto()
-    await loginPage.populateForm(
-      user_credentials.username,
-      user_credentials.password
-    )
-
-    await page.click('#signup')
-    await page.waitForURL('http://localhost:5173/')
-    await page.close()
-
-    await use(user_credentials)
-  },
+export const test = testBase.extend<QuoteFixtures>({
   getQuoteDetails: async ({}, use) => {
     const testBody = faker.lorem.sentence()
     const testTag = faker.word.adverb()
