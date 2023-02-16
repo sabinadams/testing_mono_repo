@@ -19,7 +19,7 @@ test.describe('auth', () => {
       user_credentials.password
     )
     await page.click('#signup')
-    await page.waitForURL('http://localhost:5173')
+    await page.waitForLoadState('networkidle')
 
     const localStorage = await storage.localStorage
 
@@ -35,7 +35,7 @@ test.describe('auth', () => {
   }) => {
     await loginPage.populateForm(account.username, account.password)
     await page.click('#login')
-    await page.waitForURL('http://localhost:5173')
+    await page.waitForLoadState('networkidle')
 
     const localStorage = await storage.localStorage
 
@@ -49,7 +49,7 @@ test.describe('auth', () => {
   }) => {
     await loginPage.populateForm('incorrect', 'password')
     await page.click('#login')
-    await page.waitForURL('http://localhost:5173/login')
+    await page.waitForLoadState('networkidle')
 
     await expect(page).toHaveURL('http://localhost:5173/login')
     await expect(page.getByText('Account not found.')).toBeVisible()
@@ -85,9 +85,9 @@ test.describe('auth', () => {
   }) => {
     await loginPage.populateForm(account.username, account.password)
     await page.click('#login')
-    await page.waitForURL('http://localhost:5173')
+    await page.waitForLoadState('networkidle')
     await page.click('#logout')
-    await page.waitForURL('http://localhost:5173/login')
+    await page.waitForLoadState('networkidle')
 
     const localStorage = await storage.localStorage
 

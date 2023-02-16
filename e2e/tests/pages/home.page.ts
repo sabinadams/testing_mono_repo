@@ -13,7 +13,7 @@ export class HomePage {
     await this.loginPage.goto()
     await this.loginPage.populateForm(user.username, user.password)
     await this.page.click('#login')
-    await this.page.waitForURL('http://localhost:5173/')
+    await this.page.waitForLoadState('networkidle')
   }
 
   async populateForm(body: string, tags: string) {

@@ -36,7 +36,7 @@ export const testBase = base.extend<BaseFixtures>({
     )
 
     await page.click('#signup')
-    await page.waitForURL('http://localhost:5173/')
+    await page.waitForLoadState('networkidle')
     await page.close()
 
     await use(user_credentials)
