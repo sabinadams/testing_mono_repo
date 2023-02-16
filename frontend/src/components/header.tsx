@@ -14,6 +14,7 @@ const Header = () => {
         <>
           {location.pathname != '/login' && <NewQuoteForm />}
           <button
+            id="logout"
             onClick={logout}
             className="text-sm font-bold rounded-md bg-white p-4 shadow-solid transition duration-300 ease-in-out hover:shadow-none hover:translate-x-2 hover:translate-y-2 border-2 border-gray-700"
           >
