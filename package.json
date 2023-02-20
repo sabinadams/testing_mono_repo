@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "dev": "pnpm run -r dev",
     "checks": "pnpm run -r checks",
     "startup": "./scripts/db-startup.sh && pnpm run -r dev",
     "test:backend:int": "pnpm run --filter=backend test:int",
