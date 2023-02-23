@@ -23,7 +23,7 @@ test.describe('auth', () => {
 
     const localStorage = await storage.localStorage
 
-    await expect(localStorage).toHaveProperty('quoots-user')
+    expect(localStorage).toHaveProperty('quoots-user')
     await expect(page).toHaveURL('http://localhost:5173')
   })
 
@@ -39,7 +39,7 @@ test.describe('auth', () => {
 
     const localStorage = await storage.localStorage
 
-    await expect(localStorage).toHaveProperty('quoots-user')
+    expect(localStorage).toHaveProperty('quoots-user')
     await expect(page).toHaveURL('http://localhost:5173')
   })
 
@@ -92,6 +92,6 @@ test.describe('auth', () => {
     const localStorage = await storage.localStorage
 
     await expect(page).toHaveURL('http://localhost:5173/login')
-    await expect(localStorage).not.toHaveProperty('quoots-user')
+    expect(localStorage).not.toHaveProperty('quoots-user')
   })
 })
