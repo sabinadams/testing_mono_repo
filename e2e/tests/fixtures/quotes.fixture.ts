@@ -38,15 +38,17 @@ export const test = testBase.extend<QuoteFixtures>({
   },
   quote: async ({ homePage, page, getQuoteDetails }, use) => {
     const details = getQuoteDetails(true, true)
+    const responsePromise = page.waitForResponse(
+      resp => resp.url().includes('/quotes') && resp.status() === 200
+    )
     await homePage.populateForm(details.body, details.tags)
     await page.click('#save-quote')
-    await page.waitForLoadState('networkidle')
+    await responsePromise
 
     const quote = await prisma.quote.findFirst({
       include: { tags: true },
       where: { text: details.body }
     })
-
     await use(quote)
   },
   homePage: async ({ page, account }, use) => {
