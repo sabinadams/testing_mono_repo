@@ -73,6 +73,7 @@ describe('auth.service', () => {
     })
 
     it('should throw an error if there is no API_SECRET env var', () => {
+      process.env.API_SECRET = undefined
       expect(() => AuthService.generateJWT(1)).toThrow()
     })
   })
@@ -86,6 +87,7 @@ describe('auth.service', () => {
       expect(jwt.verify).toHaveBeenCalledWith('token', 'secret')
     })
     it('should throw an error if there is no API_SECRET env var', () => {
+      process.env.API_SECRET = undefined
       expect(() => AuthService.validateJWT('')).toThrow()
     })
   })
