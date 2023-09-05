@@ -11,6 +11,7 @@ vi.mock('randomcolor', () => ({
 describe('tags.service', () => {
   beforeEach(() => {
     vi.restoreAllMocks()
+    // adding useless commit
   })
   describe('upsertTags', () => {
     it('should return a list of tagIds', async () => {
