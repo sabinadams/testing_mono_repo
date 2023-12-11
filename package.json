@@ -10,7 +10,7 @@
     "test:backend:int": "pnpm run --filter=backend test:int",
     "test:backend:unit": "pnpm run --filter=backend test:unit"
   },
-  "keywords": [],
+  "keywords": ["test"],
   "author": "",
   "license": "ISC",
   "dependencies": {
